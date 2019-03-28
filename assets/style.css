@@ -1,0 +1,12 @@
+#searchField {
+    margin:auto;
+}
+
+.btn {
+    border-bottom: 2px solid green;
+}
+
+#gifDisplay {
+    border-top: 3px solid green;
+    /* border-bottom: 3px solid green; */
+}
