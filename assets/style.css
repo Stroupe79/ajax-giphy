@@ -7,6 +7,12 @@
     border-right: 2px solid green;
 }
 
+/* .btn:hover {
+    border-bottom: 2px solid red;
+    border-right: 2px solid red;
+} */
+
+
 #gifDisplay {
     border-top: 3px solid green;
     border-bottom: 3px solid green;
