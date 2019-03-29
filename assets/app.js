@@ -38,11 +38,9 @@ $(document).ready(function () {
             url: query,
             method: "GET"
         }).then(function (response) {
-            console.log(response.data[0].url)
-            $("#gifShow").append("<img src=" + response.data[0].url + " />")
+            console.log(response.data[0].images.fixed_height.url)
+            $("#gifShow").append("<img src=" + response.data[0].images.fixed_height.url + " />")
         });
-
-
 
     }
 
