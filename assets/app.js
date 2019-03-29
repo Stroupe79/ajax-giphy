@@ -38,8 +38,11 @@ $(document).ready(function () {
             url: query,
             method: "GET"
         }).then(function (response) {
-            console.log(response.data[0].images.fixed_height.url)
-            $("#gifShow").append("<img src=" + response.data[0].images.fixed_height.url + " />")
+            $("#gifShow").html("");
+            for (i = 0; i < 8; i++){
+            console.log(response)
+            $("#gifShow").append("<img class= 'm-5' src=" + response.data[i].images.fixed_height.url + " />")
+            }
         });
 
     }
