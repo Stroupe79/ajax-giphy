@@ -31,6 +31,8 @@ $(document).ready(function () {
         }
     });
 
+    // $("<button>").on("Click", searchGIF($("#searchField").val()));
+
     function searchGIF(searchVal) {
         console.log(searchVal);
         let query = "https://api.giphy.com/v1/gifs/search?q=" + searchVal + "&api_key=va3byTEOOuISlLe0hh47DYH0psyejaCo&limit=8";
@@ -43,6 +45,7 @@ $(document).ready(function () {
             console.log(response)
             $("#gifShow").append("<img class= 'm-5' src=" + response.data[i].images.fixed_height.url + " />")
             }
+            $("#searchField").val(" ");
         });
 
     }
