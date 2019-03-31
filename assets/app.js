@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    var gifs = ["Cats", "Dogs", "Horses", "Ducks"];
+    var gifs = ["The Office", "Rick and Morty", "Simpsons", "Family Guy"];
 
     buttons();
 
@@ -10,7 +10,7 @@ $(document).ready(function () {
         $("#gifDisplay").empty();
         for (var i = 0; i < gifs.length; i++) {
             let button = $("<button>")
-            button.addClass("btn btn-success m-5")
+            button.addClass("btn btn-success m-5 clicky")
             button.attr("val", gifs[i]);
             button.text(gifs[i]);
             $("#gifDisplay").append(button);
@@ -39,13 +39,35 @@ $(document).ready(function () {
         buttons();
     });
 
-    $(document).on("click", ".btn", function(){
+    $(document).on("click", ".clicky", function(){
         var search = $(this).attr("val")
         searchGIF(search);
         buttons();
     });
 
+    $(document).on("click", "#randomButton", function(){
+        console.log("random")
+        randomGif();
+    
+})
 
+    $(document).on("click", "#resetButton", function(){
+        location.reload();
+    })
+
+    function randomGif(){
+        let query = "https://api.giphy.com/v1/gifs/random?api_key=va3byTEOOuISlLe0hh47DYH0psyejaCo"
+        $.ajax({
+            url: query,
+            method: "GET"
+        }).then(function (response){
+            $("#gifShow").html("");
+            console.log(response)
+            let stop = response.data.images.fixed_height_still.url
+                let animate = response.data.images.fixed_height.url
+            $("#gifShow").append("<img state='animated' class= 'm-5 gif' src=" + animate + " stop-animate=" + stop + " start-animate=" + animate + " /> <p> Title: " + response.data.title + "</p>")
+        })
+    }
 
     function searchGIF(searchVal) {
         console.log(searchVal);
@@ -56,12 +78,27 @@ $(document).ready(function () {
         }).then(function (response) {
             $("#gifShow").html("");
             for (i = 0; i < 8; i++) {
-                console.log(response)
-                $("#gifShow").append("<img class= 'm-5' src=" + response.data[i].images.fixed_height.url + " /> <p> Rating: " + response.data[i].rating + "</p>");
+                let stop = response.data[i].images.fixed_height_still.url
+                let animate = response.data[i].images.fixed_height.url
+                $("#gifShow").append("<img state='animated' class= 'm-5 gif' src=" + animate + " stop-animate=" + stop + " start-animate=" + animate + " /> <p> Rating: " + response.data[i].rating + "</p>");
             };
             $("#searchField").val(" ");
         });
 
     };
+
+    $(document).on("click", ".gif", function(){
+        var state = $(this).attr("state");
+        if (state === "animated"){
+            $(this).attr("src", $(this).attr("stop-animate"))
+            $(this).attr("state", "stopped")
+        }
+        if (state === "stopped"){
+            $(this).attr("src", $(this).attr("start-animate"));
+            $(this).attr("state", "animated");
+        }
+
+    });
+    
 
 });
