@@ -82,7 +82,7 @@ $(document).ready(function () {
                 let animate = response.data[i].images.fixed_height.url
                 $("#gifShow").append("<img state='animated' class= 'm-5 gif' src=" + animate + " stop-animate=" + stop + " start-animate=" + animate + " /> <p> Rating: " + response.data[i].rating + "</p>");
             };
-            $("#searchField").val(" ");
+            $("#searchField").val("");
         });
 
     };
