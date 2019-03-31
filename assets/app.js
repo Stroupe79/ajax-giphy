@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    var gifs = ["The Office", "Rick and Morty", "Simpsons", "Family Guy"];
+    var gifs = ["Futurama", "Rick and Morty", "Simpsons", "Family Guy"];
 
     buttons();
 
