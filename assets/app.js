@@ -23,7 +23,6 @@ $(document).ready(function () {
         if (event.keyCode === 13) {
             var search = $("#searchField").val();
             searchGIF(search);
-            console.log(search)
             event.preventDefault();
             gifs.push(search);
             search = "";
@@ -33,6 +32,21 @@ $(document).ready(function () {
 
     // $("<button>").on("Click", searchGIF($("#searchField").val()));
 
+    $(document).on("click", "#searchButton", function(){
+        var search = $("#searchField").val()
+        gifs.push(search);
+        searchGIF(search);
+        buttons();
+    });
+
+    $(document).on("click", ".btn", function(){
+        var search = $(this).attr("val")
+        searchGIF(search);
+        buttons();
+    });
+
+
+
     function searchGIF(searchVal) {
         console.log(searchVal);
         let query = "https://api.giphy.com/v1/gifs/search?q=" + searchVal + "&api_key=va3byTEOOuISlLe0hh47DYH0psyejaCo&limit=8";
@@ -41,13 +55,13 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             $("#gifShow").html("");
-            for (i = 0; i < 8; i++){
-            console.log(response)
-            $("#gifShow").append("<img class= 'm-5' src=" + response.data[i].images.fixed_height.url + " />")
-            }
+            for (i = 0; i < 8; i++) {
+                console.log(response)
+                $("#gifShow").append("<img class= 'm-5' src=" + response.data[i].images.fixed_height.url + " /> <p> Rating: " + response.data[i].rating + "</p>");
+            };
             $("#searchField").val(" ");
         });
 
-    }
+    };
 
 });
